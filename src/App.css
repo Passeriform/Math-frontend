@@ -1,0 +1,35 @@
+.App {
+  text-align: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  padding: 0 10vw;
+  min-width: 15em;
+}
+
+.App-header > * {
+  margin: calc(12vh - 2em) 0;
+}
+
+.descriptor > h1 {
+  font-size: 4em;
+  margin-bottom: 0.25em;
+}
+
+.descriptor > p {
+  font-size: 0.95em;
+}
+
+.descriptor > p > a {
+  color: #7289DA;
+}
