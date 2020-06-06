@@ -24,7 +24,7 @@ export const ExprForm: FC<IProps> = props => {
     setExpr(newValue);
     const exprError = validateExpr(newValue);
     if (exprError === "") {
-      props.onChange({expr});
+      props.onChange({expr: newValue});
     }
   };
 
