@@ -12,6 +12,7 @@ export interface IEvalResult {
 
 interface IProps {
   onEval: (data : IEvalData) => IEvalResult;
+  onChange: (data : IEvalData) => IEvalResult;
 }
 
 export const ExprForm: FC<IProps> = props => {
@@ -19,8 +20,12 @@ export const ExprForm: FC<IProps> = props => {
   const [exprError, setExprError] = useState("");
 
   const handleExprChange = (e : ChangeEvent<HTMLInputElement>) => {
-    setExpr(e.currentTarget.value);
-    setExprError("");
+    let newValue = e.target.value;
+    setExpr(newValue);
+    const exprError = validateExpr(newValue);
+    if (exprError === "") {
+      props.onChange({expr});
+    }
   };
 
   const validateExpr = (value : string): string => {
@@ -42,7 +47,7 @@ export const ExprForm: FC<IProps> = props => {
 
   return (<form noValidate={true} onSubmit={handleEvaluate}>
     <div className="row">
-      <input type="text" placeholder="Enter expression..." id="expr" onChange={handleExprChange} value={expr}/>
+      <input type="text" placeholder="Enter comma separated cost and p..." id="expr" onChange={handleExprChange} value={expr}/>
     </div>
 
     <div className="row">
