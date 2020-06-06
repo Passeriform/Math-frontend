@@ -8,7 +8,7 @@ export const HomePage = () => {
 
   const handleOnEval = (data : IEvalData) => {
     let [cost, p] = data.expr.split(',');
-    axios.get('http://localhost:8000/api/eval/', {
+    axios.get('https://mathcalci-backend.herokuapp.com/api/eval/', {
       params: {
         op: "output_level",
         cost: cost,
