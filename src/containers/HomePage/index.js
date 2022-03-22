@@ -7,24 +7,30 @@ export const HomePage = () => {
   const history = useHistory();
 
   const handleOnEval = (data : IEvalData) => {
-    axios.get('http://ravigitte.pythonanywhere.com/solve/', {
+    let [cost, p] = data.expr.split(',');
+    axios.get('https://mathcalci-backend.herokuapp.com/api/eval/', {
       params: {
-        exp: data.expr
+        op: "output_level",
+        cost: cost,
+        p: p
       }
     }).then(function(response) {
-      history.push("/result", {result: response.data});
+      history.push("/result", {qstr: data.expr, result: response.data});
     }).catch(function(err) {
-      console.log(data);
+      console.log(err, data);
     });
+  }
+
+  const handleOnChange = (data : IEvalData) => {
+    console.log("Current expression:", data.expr)
   }
 
   return (<header className="App-header">
     <div className="descriptor">
-      <h1>Math</h1>
-      <p>A frontend demo for<br/>
-        <a href="https://github.com/ravigitte/math">https://github.com/ravigitte/math</a>
+      <h1>MathCalci</h1>
+      <p>A prototype sequential math problem solver.<br/>
       </p>
     </div>
-    <ExprForm onEval={handleOnEval}/>
+    <ExprForm onEval={handleOnEval} onChange={handleOnChange}/>
   </header>);
 }
